@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
             tv_text.text= it
         })
 
-
         bt_buttob.setOnClickListener{
             viewModel.updateLivedata()
         }
