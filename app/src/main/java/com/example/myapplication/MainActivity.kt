@@ -4,33 +4,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var dataBinding :ActivityMainBinding
     lateinit var  viewModel: MainViewModel
-    lateinit var tv_text :TextView
-    lateinit var  bt_buttob : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        dataBinding= DataBindingUtil.setContentView(this,R.layout.activity_main)
         viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
-        tv_text= findViewById(R.id.tv_text)
-        bt_buttob= findViewById(R.id.bt_click)
 
-        viewModel.livedata.observe(this, Observer {
-            tv_text.text= it
-        })
+        dataBinding.databind=viewModel
+        dataBinding.lifecycleOwner=this
 
-        bt_buttob.setOnClickListener{
+        dataBinding.btClick.setOnClickListener{
             viewModel.updateLivedata()
         }
     }
-
-
 
 
 }

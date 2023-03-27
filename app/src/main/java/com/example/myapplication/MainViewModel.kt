@@ -10,8 +10,4 @@ class MainViewModel : ViewModel() {
     fun updateLivedata(){
         livedata.value="Another data"
     }
-
-
-
-
 }
